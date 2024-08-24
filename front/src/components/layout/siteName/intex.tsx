@@ -8,7 +8,9 @@ export default function SiteName({ isMenu }: { isMenu?: boolean }) {
       >
         TALK DECK
       </span>
-      <span className="tracking-[10px]">会話デッキ</span>
+      <span className={`tracking-[10px] ${isMenu && "text-black"}`}>
+        会話デッキ
+      </span>
     </h1>
   );
 }
