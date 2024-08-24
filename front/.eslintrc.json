@@ -1,3 +1,30 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:import/recommended",
+    "plugin:import/warnings",
+    "prettier",
+    "eslint:recommended",
+    "plugin:tailwindcss/recommended"
+  ],
+  "plugins": ["import", "unused-imports"],
+  "rules": {
+    "unused-imports/no-unused-imports": "error",
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [["@", "./src"]],
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  }
 }
