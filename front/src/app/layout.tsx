@@ -3,7 +3,6 @@ import { Zen_Kaku_Gothic_Antique } from "next/font/google";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "./globals.css";
-import { Footer } from "@/components/layout";
 
 const zenKakuGothicAntique = Zen_Kaku_Gothic_Antique({
   weight: "400",
@@ -23,12 +22,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={zenKakuGothicAntique.className}>
-        <MantineProvider>
-          <div className="w-full min-h-screen flex flex-col justify-center items-center">
-            <div className="w-full flex-grow">{children}</div>
-            <Footer />
-          </div>
-        </MantineProvider>
+        <MantineProvider>{children}</MantineProvider>
       </body>
     </html>
   );

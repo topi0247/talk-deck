@@ -44,7 +44,7 @@ export default function Header() {
                 <span className="bg-white h-full text-black w-full px-4 py-4 rounded text-center leading-10">
                   マイデッキ
                   <br />
-                  自分のデッキ一覧
+                  自分のデッキ
                 </span>
               </Link>
             </li>
@@ -56,7 +56,7 @@ export default function Header() {
                 <span className="bg-white h-full text-black w-full px-4 py-4 rounded text-center leading-10">
                   お気に入り
                   <br />
-                  お気に入りデッキ一覧
+                  お気に入り
                 </span>
               </Link>
             </li>
