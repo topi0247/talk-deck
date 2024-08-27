@@ -23,7 +23,7 @@ export default function TalkDeck() {
         <h2 className="text-3xl text-center text-white">みんなのデッキ</h2>
         <div className="md:grid md:grid-cols-3">
           {CardData.map((data) => (
-            <CardCarousel key={data.uuid} cards={data} isShared />
+            <CardCarousel key={data.uuid} cards={data} isShared isLikes />
           ))}
         </div>
       </Container>

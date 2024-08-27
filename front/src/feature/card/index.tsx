@@ -9,14 +9,27 @@ import { EffectCards } from "swiper/modules";
 import { Button } from "@mantine/core";
 import { ICards } from "@/types";
 import Likes from "@/feature/likes";
+import { usePathname } from "next/navigation";
 
 export default function CardCarousel({
   cards,
   isShared,
+  isLikes,
 }: {
   cards: ICards;
-  isShared: boolean;
+  isShared?: boolean;
+  isLikes?: boolean;
 }) {
+  const pathname = usePathname();
+
+  const handleClick = (uuid: string) => {
+    const text = `${cards.situation}での %20%23会話デッキ%20%0aはこちら！！%0a`;
+    const appUrl =
+      window.location.href.replace(pathname, "") + `/talkDeck/${uuid}`;
+    const url = `https://twitter.com/intent/tweet?text=${text}&url=${appUrl}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="w-full overflow-hidden my-4 justify-center items-center">
       <Swiper
@@ -53,12 +66,18 @@ export default function CardCarousel({
           </SwiperSlide>
         ))}
       </Swiper>
-      {isShared && (
-        <div className="w-full flex justify-center items-center mt-2 gap-4">
-          <Button variant="default">X Share</Button>
-          <Likes />
-        </div>
-      )}
+      <div className="w-full flex justify-center items-center mt-2 gap-4">
+        {isShared && (
+          <Button
+            variant="filled"
+            color="black"
+            onClick={() => handleClick(cards.uuid)}
+          >
+            X Share
+          </Button>
+        )}
+        {isLikes && <Likes uuid={cards.uuid} />}
+      </div>
     </div>
   );
 }
