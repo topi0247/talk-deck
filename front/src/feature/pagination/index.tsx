@@ -12,6 +12,7 @@ export default function PaginationComponent({ total }: { total: number }) {
   useEffect(() => {
     const page = searchParams.get("page");
     if (page) setActivePage(parseInt(page));
+    else setActivePage(1);
   }, [searchParams]);
 
   const handleOnChange = (pageNumber: number) => {

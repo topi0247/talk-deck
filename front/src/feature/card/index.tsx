@@ -26,7 +26,7 @@ export default function CardCarousel({
     const text = `${cards.situation}での %20%23会話デッキ%20%0aはこちら！！%0a`;
     const appUrl =
       window.location.href.replace(pathname, "") + `/talkDeck/${uuid}`;
-    const url = `https://twitter.com/intent/tweet?text=${text}&url=${appUrl}`;
+    const url = `https://x.com/intent/tweet?text=${text}&url=${appUrl}`;
     window.open(url, "_blank");
   };
 
