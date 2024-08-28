@@ -42,7 +42,7 @@ export default function Header() {
                     <span className="bg-white h-full text-black w-full px-4 py-4 rounded text-center leading-10">
                       新規作成
                       <br />
-                      新しいデッキを作
+                      新しいデッキ
                     </span>
                   </Link>
                 </li>

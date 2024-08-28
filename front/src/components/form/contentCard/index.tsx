@@ -6,14 +6,14 @@ import { Button, InputLabel, Textarea, TextInput } from "@mantine/core";
 export default function FormContentCard({
   index,
   title,
-  content,
+  comment,
   handleTitleChange,
   handleContentChange,
   handleDelete,
 }: {
   index: number;
   title: string;
-  content: string;
+  comment: string;
   handleTitleChange: (index: number, value: string) => void;
   handleContentChange: (index: number, value: string) => void;
   handleDelete: (index: number) => void;
@@ -34,12 +34,12 @@ export default function FormContentCard({
         }
       />
       <InputLabel>コメント</InputLabel>
-      {content.length > 50 && (
+      {comment.length > 50 && (
         <p className="text-sm text-red-600">50文字以内で記入してください</p>
       )}
       <Textarea
         name={`card[${index}].description`}
-        value={content}
+        value={comment}
         onChange={(event) =>
           handleContentChange(index, event.currentTarget.value)
         }

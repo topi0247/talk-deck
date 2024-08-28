@@ -45,8 +45,8 @@ export default function CardCarousel({
           <div className="target">
             <h4>こんな人におすすめ！</h4>
             <ul>
-              {cards.target.map((target) => (
-                <li key={target}>{target}</li>
+              {cards.target.map((target, index) => (
+                <li key={index}>{target}</li>
               ))}
             </ul>
           </div>
@@ -54,8 +54,8 @@ export default function CardCarousel({
             <p>by {cards.creator}</p>
           </div>
         </SwiperSlide>
-        {cards.cards.map((card) => (
-          <SwiperSlide key={card.title}>
+        {cards.cards.map((card, index) => (
+          <SwiperSlide key={index}>
             <div className="title">
               <h3>{card.title}</h3>
             </div>

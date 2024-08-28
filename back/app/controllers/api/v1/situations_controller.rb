@@ -16,6 +16,7 @@ class Api::V1::SituationsController < Api::V1::BasesController
 
   def create
     ApplicationRecord.transaction do
+      Rails.logger.info(situation_params)
       situation = Situation.new(situation_params.except(:targets, :body))
       situation.user = @current_user
       situation.save!
@@ -30,7 +31,7 @@ class Api::V1::SituationsController < Api::V1::BasesController
       end
 
       render json: {uuid: situation.uuid}, status: :created
-    rescue ActiveRecord::RecordInvalid => e
+    rescue => e
       Rails.logger.error(e.message)
       render json: { error: e.message }, status: :unprocessable_entity
     end

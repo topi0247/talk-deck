@@ -1,6 +1,7 @@
 "use client";
 
 import { FormCard, FormContentCard } from "@/components/form";
+import { Config } from "@/config";
 import { ICard } from "@/types";
 import {
   Autocomplete,
@@ -11,12 +12,15 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function New() {
   const [tags, setTags] = useState<string[]>([]);
   const [contentCards, setContentCards] = useState<ICard[]>([]);
   const [isTargetError, setIsTargetError] = useState(false);
   const [isContentError, setIsContentError] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchTags = async () => {
@@ -29,7 +33,7 @@ export default function New() {
         {
           index: 0,
           title: "",
-          content: "",
+          comment: "",
         },
       ]);
     };
@@ -38,14 +42,14 @@ export default function New() {
 
   const form = useForm({
     initialValues: {
-      situation: "",
+      title: "",
       target1: "",
       target2: "",
       target3: "",
-      card: [{ index: 0, title: "", content: "" }] as ICard[],
+      card: [{ index: 0, title: "", comment: "" }] as ICard[],
     },
     validate: {
-      situation: (value: string) => {
+      title: (value: string) => {
         if (value.length < 1) {
           return "シチュエーション名は必須です";
         } else if (value.length > 36) {
@@ -71,22 +75,55 @@ export default function New() {
   });
 
   const handleSubmit = async () => {
-    const { situation, target1, target2, target3, card } = form.getValues();
+    const { title, target1, target2, target3 } = form.getValues();
 
-    let isErorr = false;
+    let isError = false;
     setIsTargetError(target1 === "" && target2 === "" && target3 === "");
-    isErorr = target1 === "" && target2 === "" && target3 === "";
+    isError = target1 === "" && target2 === "" && target3 === "";
 
     setIsContentError(
-      card.length < 1 || card.some((c) => c.title === "" || c.content === ""),
+      contentCards.length < 1 ||
+        contentCards.some((c) => c.title === "" || c.comment === ""),
     );
-    isErorr =
-      card.length < 1 || card.some((c) => c.title === "" || c.content === "");
+    isError =
+      contentCards.length < 1 ||
+      contentCards.some((c) => c.title === "" || c.comment === "");
 
-    if (isErorr) {
+    if (isError) {
       return;
     }
 
+    const body = contentCards.map((c) => {
+      return {
+        title: c.title,
+        comment: c.comment,
+      };
+    });
+
+    const situation = {
+      title,
+      targets: [target1, target2, target3],
+      body,
+    };
+
+    const url = `${Config.API_URL}/situations`;
+    const token = Cookies.get("token") || "";
+    const result = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "POST",
+      body: JSON.stringify({ situation }),
+    });
+
+    if (result.status !== 201) {
+      alert("エラーが発生しました");
+      return;
+    }
+
+    const data = await result.json();
+    router.push(`/talkDeck/${data.uuid}`);
   };
 
   const handleAddCard = () => {
@@ -95,7 +132,7 @@ export default function New() {
       {
         index: prev.length,
         title: "",
-        content: "",
+        comment: "",
       },
     ]);
   };
@@ -113,7 +150,7 @@ export default function New() {
   const handleContentChange = (index: number, value: string) => {
     const newContentCards = contentCards.map((card) => {
       if (card.index === index) {
-        return { ...card, content: value };
+        return { ...card, comment: value };
       }
       return card;
     });
@@ -140,8 +177,8 @@ export default function New() {
             <TextInput
               label="シチュエーション名"
               withAsterisk
-              name="situation"
-              {...form.getInputProps("situation")}
+              name="title"
+              {...form.getInputProps("title")}
             />
             <InputLabel>
               ターゲット<span className="text-red-400">*</span>
@@ -182,7 +219,7 @@ export default function New() {
                   key={card.index}
                   index={card.index}
                   title={card.title}
-                  content={card.content}
+                  comment={card.comment}
                   handleTitleChange={handleTitleChange}
                   handleContentChange={handleContentChange}
                   handleDelete={handleDelete}
