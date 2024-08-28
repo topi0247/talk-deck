@@ -1,5 +1,4 @@
-class SituationSerializer
-  include JSONAPI::Serializer
+class SituationSerializer < ActiveModel::Serializer
   attributes :uuid, :title
   belongs_to :user
   has_many :contents

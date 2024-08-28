@@ -86,8 +86,7 @@ export default function New() {
         contentCards.some((c) => c.title === "" || c.comment === ""),
     );
     isError =
-      contentCards.length < 1 ||
-      contentCards.some((c) => c.title === "" || c.comment === "");
+      contentCards.length < 1 || contentCards.some((c) => c.title === "");
 
     if (isError) {
       return;

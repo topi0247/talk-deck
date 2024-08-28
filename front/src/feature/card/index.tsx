@@ -23,7 +23,7 @@ export default function CardCarousel({
   const pathname = usePathname();
 
   const handleClick = (uuid: string) => {
-    const text = `${cards.situation}での %20%23会話デッキ%20%0aはこちら！！%0a`;
+    const text = `${cards.title}での %20%23会話デッキ%20はこちら！！%0a`;
     const appUrl =
       window.location.href.replace(pathname, "") + `/talkDeck/${uuid}`;
     const url = `https://x.com/intent/tweet?text=${text}&url=${appUrl}`;
@@ -40,21 +40,21 @@ export default function CardCarousel({
       >
         <SwiperSlide>
           <div className="situation">
-            <h3>{cards.situation}</h3>
+            <h3>{cards.title}</h3>
           </div>
           <div className="target">
             <h4>こんな人におすすめ！</h4>
             <ul>
-              {cards.target.map((target, index) => (
-                <li key={index}>{target}</li>
+              {cards.targets.map((target, index) => (
+                <li key={index}>{target.body}</li>
               ))}
             </ul>
           </div>
           <div className="creator">
-            <p>by {cards.creator}</p>
+            <p>by {cards.user.name}</p>
           </div>
         </SwiperSlide>
-        {cards.cards.map((card, index) => (
+        {cards.contents.map((card, index) => (
           <SwiperSlide key={index}>
             <div className="title">
               <h3>{card.title}</h3>

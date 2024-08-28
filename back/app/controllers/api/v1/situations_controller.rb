@@ -6,12 +6,12 @@ class Api::V1::SituationsController < Api::V1::BasesController
   def index
     current_page = params[:page] || 1
     pagy, situation = pagy(Situation.includes(:targets, :contents).all, page: current_page)
-    render json: situations, status: :ok
+    render json: situations, each_serializer: SituationSerializer, status: :ok
   end
 
   def show
-    situation = Situation.find(params[:id])
-    render json: situation, status: :ok
+    situation = Situation.find_by(uuid: params[:id])
+    render json: situation, serializer: SituationSerializer, status: :ok
   end
 
   def create
@@ -22,6 +22,7 @@ class Api::V1::SituationsController < Api::V1::BasesController
       situation.save!
 
       situation_params[:targets].each do |target_body|
+        next if target_body.blank?
         target = Target.find_or_create_by!(body: target_body)
         situation.targets << target
       end

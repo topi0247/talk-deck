@@ -1,23 +1,31 @@
+"use client";
+
 import CardCarousel from "@/feature/card";
-import { ICards } from "@/types";
+import useFetch from "@/hook/useFetch";
+import { userState } from "@/recoil";
 import Link from "next/link";
+import { useRecoilValue } from "recoil";
 
-const Data: ICards = {
-  uuid: "0",
-  situation: "situation",
-  target: ["target", "target", "target"],
-  creator: "creator",
-  cards: Array.from({ length: 10 }, (_, j) => ({
-    index: j,
-    title: `title-${j}`,
-    content: `content-${j}`,
-  })),
-};
+export default function Card({
+  params: { uuid },
+}: {
+  params: { uuid: string };
+}) {
+  const user = useRecoilValue(userState);
+  const { loading, error, data } = useFetch(`/situations/${uuid}`);
+  if (loading) return <div>loading...</div>;
 
-export default function Card({ uuid }: { uuid: string }) {
+  if (error) return <div>error...</div>;
+  console.log(data);
+
   return (
     <>
-      <CardCarousel key={uuid} cards={Data} isShared />
+      <CardCarousel
+        key={uuid}
+        cards={data}
+        isShared
+        isLikes={user.uuid !== data.user.uuid}
+      />
       <div className="mt-8 flex justify-center items-center">
         <Link
           href="/talkDeck"

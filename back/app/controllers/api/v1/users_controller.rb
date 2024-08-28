@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::BasesController
   def show
-    render json: { name: @current_user.name }, status: :ok
+    render json: @current_user, serializer: UserSerializer, status: :ok
   end
 
   def update

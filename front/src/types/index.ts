@@ -6,13 +6,18 @@ interface ICard {
 
 interface ICards {
   uuid: string;
-  situation: string;
-  target: string[];
-  creator: string;
-  cards: ICard[];
+  title: string;
+  targets: ITargets[];
+  user: IUser;
+  contents: ICard[];
+}
+
+interface ITargets {
+  body: string;
 }
 
 interface IUser {
+  uuid: string;
   name: string;
 }
 

@@ -24,7 +24,7 @@ export default function CurrentUser() {
 
     if (!res.ok) {
       Cookies.remove("token");
-      setUser({ name: "" });
+      setUser({ uuid: "", name: "" });
       return;
     }
     const data = await res.json();
