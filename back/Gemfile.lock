@@ -75,6 +75,7 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    ast (2.4.2)
     base64 (0.2.0)
     bigdecimal (3.1.8)
     bootsnap (1.18.4)
@@ -87,16 +88,33 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    dotenv (3.1.2)
+    dotenv-rails (3.1.2)
+      dotenv (= 3.1.2)
+      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.0)
+    faraday (2.11.0)
+      faraday-net_http (>= 2.0, < 3.4)
+      logger
+    faraday-net_http (3.3.0)
+      net-http
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hashie (5.0.0)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
     irb (1.14.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
+    json (2.7.2)
+    jsonapi-serializer (2.2.0)
+      activesupport (>= 4.2)
+    jwt (2.8.2)
+      base64
+    language_server-protocol (3.17.0.3)
+    logger (1.6.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -109,7 +127,11 @@ GEM
     mini_mime (1.1.5)
     minitest (5.25.0)
     msgpack (1.7.2)
+    multi_xml (0.7.1)
+      bigdecimal (~> 3.1)
     mutex_m (0.2.0)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.14)
       date
       net-protocol
@@ -122,6 +144,33 @@ GEM
     nio4r (2.7.3)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
+    oauth2 (2.0.9)
+      faraday (>= 0.17.3, < 3.0)
+      jwt (>= 1.0, < 3.0)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 4)
+      snaky_hash (~> 2.0)
+      version_gem (~> 1.1)
+    omniauth (2.1.2)
+      hashie (>= 3.4.6)
+      rack (>= 2.2.3)
+      rack-protection
+    omniauth-google-oauth2 (1.1.2)
+      jwt (>= 2.0)
+      oauth2 (~> 2.0)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.8)
+    omniauth-oauth2 (1.8.0)
+      oauth2 (>= 1.4, < 3)
+      omniauth (~> 2.0)
+    omniauth-rails_csrf_protection (1.0.2)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
+    pagy (9.0.6)
+    parallel (1.26.3)
+    parser (3.3.4.2)
+      ast (~> 2.4.1)
+      racc
     pg (1.5.7)
     psych (5.1.2)
       stringio
@@ -129,6 +178,11 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.7)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
+    rack-protection (4.0.0)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0, < 4)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -157,6 +211,9 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails_same_site_cookie (0.1.9)
+      rack (>= 1.5)
+      user_agent_parser (~> 2.6)
     railties (7.1.3.4)
       actionpack (= 7.1.3.4)
       activesupport (= 7.1.3.4)
@@ -165,16 +222,42 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
+    rainbow (3.1.1)
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
+    regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
+    rexml (3.3.6)
+      strscan
+    rubocop (1.65.1)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.4, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.32.1)
+      parser (>= 3.3.1.0)
+    ruby-progressbar (1.13.0)
+    snaky_hash (2.0.1)
+      hashie
+      version_gem (~> 1.1, >= 1.1.1)
     stringio (3.1.1)
+    strscan (3.1.0)
     thor (1.3.1)
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (2.5.0)
+    uri (0.13.1)
+    user_agent_parser (2.18.0)
+    version_gem (1.1.4)
     webrick (1.8.1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -187,9 +270,19 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  dotenv-rails
+  jsonapi-serializer
+  jwt
+  omniauth
+  omniauth-google-oauth2
+  omniauth-rails_csrf_protection
+  pagy (~> 9.0)
   pg (~> 1.1)
   puma (>= 5.0)
+  rack-cors
   rails (~> 7.1.3, >= 7.1.3.4)
+  rails_same_site_cookie
+  rubocop
   tzinfo-data
 
 RUBY VERSION
