@@ -1,12 +1,50 @@
 "use client";
 import { Button } from "@mantine/core";
 import { useState } from "react";
+import Cookies from "js-cookie";
+import { Config } from "@/config";
+import { mutate } from "swr";
 
 export default function Likes({ uuid }: { uuid: string }) {
   const [likes, setLikes] = useState(false);
 
-  const handleClick = () => {
-    setLikes(!likes);
+  const handleClick = async () => {
+    const token = Cookies.get("token") || "";
+
+    if (likes) {
+      const result = await fetch(`${Config.API_URL}/likes/${uuid}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (result.status !== 200) {
+        alert("エラーが発生しました");
+        return;
+      }
+      setLikes(false);
+    } else {
+      const result = await fetch(`${Config.API_URL}/likes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ like: { uuid } }),
+      });
+
+      if (result.status !== 201) {
+        alert("エラーが発生しました");
+        return;
+      }
+
+      setLikes(true);
+    }
+
+    mutate(`${Config.API_URL}/likes`);
+    mutate(`${Config.API_URL}/likes_all_count`);
+    mutate(`${Config.API_URL}/like/${uuid}`);
   };
 
   return (

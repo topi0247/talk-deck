@@ -10,6 +10,7 @@ interface ICards {
   targets: ITargets[];
   user: IUser;
   contents: ICard[];
+  isLikes: boolean;
 }
 
 interface ITargets {

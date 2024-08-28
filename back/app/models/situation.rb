@@ -3,6 +3,7 @@ class Situation < ApplicationRecord
   has_many :contents, dependent: :destroy
   has_many :situation_targets, dependent: :destroy
   has_many :targets, through: :situation_targets
+  has_many :likes, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 36 }
   validates :uuid, presence: true, uniqueness: true

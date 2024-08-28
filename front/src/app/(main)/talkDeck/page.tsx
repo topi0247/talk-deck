@@ -42,14 +42,18 @@ function TalkDeckShow() {
       <Container>
         <h2 className="text-3xl text-center text-white">みんなのデッキ</h2>
         <div className="md:grid md:grid-cols-3">
-          {data.map((data: ICards) => (
-            <CardCarousel
-              key={data.uuid}
-              cards={data}
-              isShared
-              isLikes={user.uuid !== data.user.uuid}
-            />
-          ))}
+          {data.length > 0 ? (
+            data.map((data: ICards) => (
+              <CardCarousel
+                key={data.uuid}
+                cards={data}
+                isShared
+                isLikes={user.uuid !== "" && user.uuid !== data.user.uuid}
+              />
+            ))
+          ) : (
+            <div>デッキがありません</div>
+          )}
         </div>
       </Container>
       {all_count && <PaginationComponent total={totalPages} />}

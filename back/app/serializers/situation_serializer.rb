@@ -3,4 +3,5 @@ class SituationSerializer < ActiveModel::Serializer
   belongs_to :user
   has_many :contents
   has_many :targets
+  has_many :likes
 end

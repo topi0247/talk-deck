@@ -27,7 +27,7 @@ function MyDeckShow() {
     if (!page) return;
 
     if (Number(page) >= totalPages) {
-      router.push(`/talkDeck?page=${totalPages}`);
+      router.push(`/talkDeck/mydeck?page=${totalPages}`);
     }
   }, [all_count, params, router, totalPages]);
 

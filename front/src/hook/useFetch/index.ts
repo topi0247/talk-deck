@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import useSWR from "swr";
 
 const fetcher = (props: string[]) => {
-  return fetch(`${Config.API_URL}/${props[0]}`, {
+  return fetch(`${Config.API_URL}${props[0]}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

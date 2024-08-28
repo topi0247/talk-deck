@@ -18,7 +18,11 @@ export default function PaginationComponent({ total }: { total: number }) {
   const handleOnChange = (pageNumber: number) => {
     if (pageNumber === activePage) return;
     if (pageNumber === 1) return router.push("/talkDeck");
-    router.push("/talkDeck?page=" + pageNumber);
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", pageNumber.toString());
+    const nextUrl = url.toString().replace(window.location.origin, "");
+    console.log(nextUrl);
+    router.push(nextUrl);
   };
 
   return (

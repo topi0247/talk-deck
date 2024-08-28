@@ -7,6 +7,7 @@ class Api::V1::SituationsController < Api::V1::BasesController
     current_page = params[:page] || 1
     total_page = (Situation.all.count / 9).ceil
     current_page = total_page if current_page.to_i >= total_page
+    current_page = 1 if current_page.to_i <= 0
     pagy, situations = pagy(Situation.includes(:targets, :contents).all.order(created_at: :desc), page: current_page)
     render json: situations, each_serializer: SituationSerializer, status: :ok
   end
@@ -51,6 +52,7 @@ class Api::V1::SituationsController < Api::V1::BasesController
     current_page = params[:page] || 1
     total_page = (@current_user.situations.count / 9).ceil
     current_page = total_page if current_page.to_i >= total_page
+    current_page = 1 if current_page.to_i <= 0
     pagy, situations = pagy(@current_user.situations.order(created_at: :desc), page: current_page)
     render json: situations, each_serializer: SituationSerializer, status: :ok
   end
