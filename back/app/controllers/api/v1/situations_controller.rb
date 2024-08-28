@@ -1,7 +1,7 @@
 include Pagy::Backend
 
 class Api::V1::SituationsController < Api::V1::BasesController
-  skip_before_action :authenticate!, only: %i[index show all_count]
+  skip_before_action :authenticate!, only: %i[all_count]
 
   def index
     current_page = params[:page] || 1
@@ -9,7 +9,7 @@ class Api::V1::SituationsController < Api::V1::BasesController
     current_page = total_page if current_page.to_i >= total_page
     current_page = 1 if current_page.to_i <= 0
     pagy, situations = pagy(Situation.includes(:targets, :contents).all.order(created_at: :desc), page: current_page)
-    render json: situations, each_serializer: SituationSerializer, status: :ok
+    render json: situations, each_serializer: SituationSerializer, current_user: @current_user, status: :ok
   end
 
   def show

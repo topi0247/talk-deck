@@ -41,7 +41,7 @@ function LikesShow() {
         <h2 className="text-3xl text-center text-white">お気に入りデッキ</h2>
         <div className="md:grid md:grid-cols-3">
           {data.map((data: ICards) => (
-            <CardCarousel key={data.uuid} cards={data} isShared isLikes />
+            <CardCarousel key={data.uuid} cards={data} isShared isLike />
           ))}
         </div>
       </Container>

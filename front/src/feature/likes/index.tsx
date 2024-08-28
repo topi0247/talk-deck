@@ -5,8 +5,14 @@ import Cookies from "js-cookie";
 import { Config } from "@/config";
 import { mutate } from "swr";
 
-export default function Likes({ uuid }: { uuid: string }) {
-  const [likes, setLikes] = useState(false);
+export default function Likes({
+  uuid,
+  isLike,
+}: {
+  uuid: string;
+  isLike: boolean;
+}) {
+  const [likes, setLikes] = useState(isLike);
 
   const handleClick = async () => {
     const token = Cookies.get("token") || "";

@@ -48,7 +48,7 @@ function TalkDeckShow() {
                 key={data.uuid}
                 cards={data}
                 isShared
-                isLikes={user.uuid !== "" && user.uuid !== data.user.uuid}
+                isLike={user.uuid !== "" && user.uuid !== data.user.uuid}
               />
             ))
           ) : (

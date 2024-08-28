@@ -14,11 +14,11 @@ import { usePathname } from "next/navigation";
 export default function CardCarousel({
   cards,
   isShared,
-  isLikes,
+  isLike,
 }: {
   cards: ICards;
   isShared?: boolean;
-  isLikes?: boolean;
+  isLike?: boolean;
 }) {
   const pathname = usePathname();
 
@@ -76,7 +76,7 @@ export default function CardCarousel({
             X Share
           </Button>
         )}
-        {isLikes && <Likes uuid={cards.uuid} />}
+        {isLike && <Likes uuid={cards.uuid} isLike={cards.isLike} />}
       </div>
     </div>
   );

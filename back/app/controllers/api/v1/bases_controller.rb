@@ -5,6 +5,7 @@ class Api::V1::BasesController < ApplicationController
     token = request.headers['Authorization']
     decode = Jwt.decode(token.split(' ').last).first
     expired = decode['expired']
+    @current_user = nil
     if expired + 2.weeks < Time.now.to_i
       render json: { error: '認証期間切れです' }, status: :unauthorized
       return
