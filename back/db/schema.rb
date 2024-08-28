@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_27_165036) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_28_075156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_165036) do
     t.string "title", limit: 36, null: false
     t.string "comment", limit: 50
     t.integer "order_by", default: 0, null: false
+    t.integer "situation_id"
+    t.index ["situation_id"], name: "index_contents_on_situation_id"
   end
 
   create_table "situation_targets", force: :cascade do |t|
