@@ -1,11 +1,13 @@
 include Pagy::Backend
 
 class Api::V1::SituationsController < Api::V1::BasesController
-  skip_before_action :authenticate!, only: %i[index show]
+  skip_before_action :authenticate!, only: %i[index show all_count]
 
   def index
     current_page = params[:page] || 1
-    pagy, situation = pagy(Situation.includes(:targets, :contents).all, page: current_page)
+    total_page = (Situation.all.count / 9).ceil
+    current_page = total_page if current_page.to_i >= total_page
+    pagy, situations = pagy(Situation.includes(:targets, :contents).all.order(created_at: :desc), page: current_page)
     render json: situations, each_serializer: SituationSerializer, status: :ok
   end
 
@@ -16,7 +18,6 @@ class Api::V1::SituationsController < Api::V1::BasesController
 
   def create
     ApplicationRecord.transaction do
-      Rails.logger.info(situation_params)
       situation = Situation.new(situation_params.except(:targets, :body))
       situation.user = @current_user
       situation.save!
@@ -40,6 +41,18 @@ class Api::V1::SituationsController < Api::V1::BasesController
 
   def all_count
     render json: { count: Situation.all.count }, status: :ok
+  end
+
+  def current_user_all_count
+    render json: { count: @current_user.situations.count }, status: :ok
+  end
+
+  def current_user_situations
+    current_page = params[:page] || 1
+    total_page = (@current_user.situations.count / 9).ceil
+    current_page = total_page if current_page.to_i >= total_page
+    pagy, situations = pagy(@current_user.situations.order(created_at: :desc), page: current_page)
+    render json: situations, each_serializer: SituationSerializer, status: :ok
   end
 
   private
