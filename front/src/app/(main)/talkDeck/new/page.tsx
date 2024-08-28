@@ -87,7 +87,6 @@ export default function New() {
       return;
     }
 
-    console.log({ situation, target1, target2, target3, card });
   };
 
   const handleAddCard = () => {

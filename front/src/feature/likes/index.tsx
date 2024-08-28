@@ -7,7 +7,6 @@ export default function Likes({ uuid }: { uuid: string }) {
 
   const handleClick = () => {
     setLikes(!likes);
-    console.log(uuid);
   };
 
   return (

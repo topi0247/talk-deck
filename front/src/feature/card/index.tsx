@@ -60,8 +60,8 @@ export default function CardCarousel({
               <h3>{card.title}</h3>
             </div>
             <div className="content">
-              <h4>詳細</h4>
-              <p>{card.content}</p>
+              <h4>コメント</h4>
+              <p>{card.comment}</p>
             </div>
           </SwiperSlide>
         ))}

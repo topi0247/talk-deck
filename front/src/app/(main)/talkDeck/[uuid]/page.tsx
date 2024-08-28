@@ -15,7 +15,6 @@ const Data: ICards = {
 };
 
 export default function Card({ uuid }: { uuid: string }) {
-  console.log(uuid);
   return (
     <>
       <CardCarousel key={uuid} cards={Data} isShared />
