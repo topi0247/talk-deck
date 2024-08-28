@@ -3,13 +3,18 @@ import Link from "next/link";
 import { useDisclosure } from "@mantine/hooks";
 import { Burger, Drawer } from "@mantine/core";
 import { SiteName } from "@/components/layout";
+import { CurrentUser } from "@/feature/auth";
 
 export default function Header() {
   const [opened, { toggle }] = useDisclosure();
+
   return (
     <>
+      <CurrentUser />
       <header className="relative w-full pl-2 pt-2">
-        <SiteName />
+        <Link href="/">
+          <SiteName />
+        </Link>
         <nav className="hidden md:block md:fixed bottom-0 left-0 w-full z-50 px-8 bg-black bg-opacity-15">
           <ul className="flex w-full gap-8 max-w-[1000px] m-auto">
             <li className="w-1/4 h-28">

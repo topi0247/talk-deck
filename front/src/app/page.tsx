@@ -2,13 +2,16 @@ import { Footer, SiteName } from "@/components/layout";
 import { Login } from "@/feature/auth";
 import { Container } from "@mantine/core";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <div className="w-full min-h-screen flex flex-col justify-center items-center">
+    <div className="w-full min-h-screen flex flex-col justify-center items-center text-black">
       <div className="w-full flex-grow">
         <main className="w-full p-4">
-          <SiteName />
+          <Link href="/">
+            <SiteName />
+          </Link>
           <Container className="my-8">
             <div className="bg-white rounded flex justify-center items-center flex-col">
               <h2 className="w-full text-center bg-yellow-300 rounded-t text-xl py-1 font-semibold tracking-[5px]">
@@ -29,7 +32,9 @@ export default function Home() {
               >
                 みんなのデッキを見る
               </Link>
-              <Login />
+              <Suspense>
+                <Login />
+              </Suspense>
             </div>
           </Container>
         </main>

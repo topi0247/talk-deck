@@ -1,9 +1,14 @@
 import { MainLayout } from "@/components/layout";
+import Provider from "@/provider";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <MainLayout>{children}</MainLayout>;
+  return (
+    <Provider>
+      <MainLayout>{children}</MainLayout>
+    </Provider>
+  );
 }
