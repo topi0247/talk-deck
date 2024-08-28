@@ -1,7 +1,24 @@
 "use client";
 
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+
 export default function Login() {
-  const handleGoogleLogin = () => {};
+  const params = useSearchParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = params.get("token") || "";
+    if (token) {
+      Cookies.set("token", token, { expires: 14 });
+      router.push("/talkDeck");
+    }
+  }, [params]);
+
+  const handleGoogleLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google_oauth2`;
+  };
 
   return (
     <button className="gsi-material-button" onClick={handleGoogleLogin}>
