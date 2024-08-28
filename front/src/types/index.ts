@@ -1,7 +1,7 @@
 interface ICard {
   index: number;
   title: string;
-  content: string;
+  comment: string;
 }
 
 interface ICards {
@@ -12,4 +12,8 @@ interface ICards {
   cards: ICard[];
 }
 
-export type { ICard, ICards };
+interface IUser {
+  name: string;
+}
+
+export type { ICard, ICards, IUser };
