@@ -1,12 +1,12 @@
 "use client";
 
+import { Container } from "@mantine/core";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
 import CardCarousel from "@/feature/card";
 import PaginationComponent from "@/feature/pagination";
 import useFetch from "@/hook/useFetch";
 import { ICards } from "@/types";
-import { Container } from "@mantine/core";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
 
 function MyDeckShow() {
   const params = useSearchParams();
@@ -37,7 +37,7 @@ function MyDeckShow() {
   return (
     <article className="w-full md:mb-32">
       <Container>
-        <h2 className="text-3xl text-center text-white">マイデッキ</h2>
+        <h2 className="text-center text-3xl text-white">マイデッキ</h2>
         <div className="md:grid md:grid-cols-3">
           {data.map((data: ICards) => (
             <CardCarousel key={data.uuid} cards={data} isShared />

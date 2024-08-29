@@ -1,8 +1,5 @@
 "use client";
 
-import { FormCard, FormContentCard } from "@/components/form";
-import { Config } from "@/config";
-import { ICard } from "@/types";
 import {
   Autocomplete,
   Box,
@@ -11,9 +8,12 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FormCard, FormContentCard } from "@/components/form";
+import { Config } from "@/config";
+import { ICard } from "@/types";
 
 export default function New() {
   const [tags, setTags] = useState<string[]>([]);
@@ -166,10 +166,10 @@ export default function New() {
 
   return (
     <article className="md:mb-32">
-      <h2 className="text-3xl text-center text-white mb-4">新規作成</h2>
-      <Box className="flex justify-center items-center">
+      <h2 className="mb-4 text-center text-3xl text-white">新規作成</h2>
+      <Box className="flex items-center justify-center">
         <form
-          className="flex flex-col justify-center items-center gap-4"
+          className="flex flex-col items-center justify-center gap-4"
           onSubmit={form.onSubmit(handleSubmit)}
         >
           <FormCard>
@@ -207,11 +207,11 @@ export default function New() {
           </FormCard>
 
           {isContentError && (
-            <p className="text-red-400 bg-white rounded px-2 py-1">
+            <p className="rounded bg-white px-2 py-1 text-red-400">
               カードは1つ以上作成してください
             </p>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 justify-center items-start">
+          <div className="grid grid-cols-1 items-start justify-center gap-3 md:grid-cols-3">
             {contentCards.map((card) => {
               return (
                 <FormContentCard
@@ -225,7 +225,7 @@ export default function New() {
                 />
               );
             })}
-            <div className="flex justify-center items-center w-full my-16">
+            <div className="my-16 flex w-full items-center justify-center">
               <Button type="button" color="green" onClick={handleAddCard}>
                 <svg
                   width="15"
@@ -245,7 +245,7 @@ export default function New() {
             </div>
           </div>
 
-          <div className="w-full flex justify-center items-center">
+          <div className="flex w-full items-center justify-center">
             <Button type="submit" color="yellow">
               <span className="text-black">作成</span>
             </Button>

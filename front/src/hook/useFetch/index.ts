@@ -1,7 +1,7 @@
 "use client";
-import { Config } from "@/config";
 import Cookies from "js-cookie";
 import useSWR from "swr";
+import { Config } from "@/config";
 
 const fetcher = (props: string[]) => {
   return fetch(`${Config.API_URL}${props[0]}`, {

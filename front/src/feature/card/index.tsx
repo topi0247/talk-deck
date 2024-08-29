@@ -1,15 +1,16 @@
 "use client";
 
+import { Button } from "@mantine/core";
+import { usePathname } from "next/navigation";
+import React from "react";
+import { EffectCards } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/effect-cards";
 
-import { EffectCards } from "swiper/modules";
-import { Button } from "@mantine/core";
-import { ICards } from "@/types";
 import Likes from "@/feature/likes";
-import { usePathname } from "next/navigation";
+import { ICards } from "@/types";
 
 export default function CardCarousel({
   cards,
@@ -31,7 +32,7 @@ export default function CardCarousel({
   };
 
   return (
-    <div className="w-full overflow-hidden my-4 justify-center items-center">
+    <div className="my-4 w-full items-center justify-center overflow-hidden">
       <Swiper
         effect={"cards"}
         grabCursor={true}
@@ -66,7 +67,7 @@ export default function CardCarousel({
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="w-full flex justify-center items-center mt-2 gap-4">
+      <div className="mt-2 flex w-full items-center justify-center gap-4">
         {isShared && (
           <Button
             variant="filled"

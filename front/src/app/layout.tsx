@@ -1,6 +1,7 @@
+import { MantineProvider } from "@mantine/core";
 import type { Metadata } from "next";
 import { Zen_Kaku_Gothic_Antique } from "next/font/google";
-import { MantineProvider } from "@mantine/core";
+import React from "react";
 import "@mantine/core/styles.css";
 import "./globals.css";
 

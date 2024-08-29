@@ -1,4 +1,4 @@
-import Login from "./login";
 import CurrentUser from "./currentUser";
+import Login from "./login";
 
 export { Login, CurrentUser };

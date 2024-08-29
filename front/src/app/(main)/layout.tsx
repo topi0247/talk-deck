@@ -1,3 +1,4 @@
+import React from "react";
 import { MainLayout } from "@/components/layout";
 import Provider from "@/provider";
 

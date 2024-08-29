@@ -1,3 +1,4 @@
+import React from "react";
 export default function FormCard({ children }: { children: React.ReactNode }) {
-  return <section className="bg-gray-300 p-4 rounded">{children}</section>;
+  return <section className="rounded bg-gray-300 p-4">{children}</section>;
 }

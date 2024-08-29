@@ -1,5 +1,5 @@
-import OneCard from "@/feature/oneCard";
 import Link from "next/link";
+import OneCard from "@/feature/oneCard";
 
 export async function generateMetadata({
   params: { uuid },
@@ -30,10 +30,10 @@ export default function Card({
   return (
     <>
       <OneCard params={{ uuid }} />
-      <div className="mt-8 flex justify-center items-center">
+      <div className="mt-8 flex items-center justify-center">
         <Link
           href="/talkDeck"
-          className="bg-green-300 bg-opacity-50 border border-green-400 rounded px-4 py-2 text-white"
+          className="rounded border border-green-400 bg-green-300/50 px-4 py-2 text-white"
         >
           一覧へ戻る
         </Link>

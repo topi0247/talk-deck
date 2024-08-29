@@ -1,7 +1,7 @@
 "use client";
 
-import { FormCard } from "@/components/form";
 import { Button, InputLabel, Textarea, TextInput } from "@mantine/core";
+import { FormCard } from "@/components/form";
 
 export default function FormContentCard({
   index,
@@ -45,7 +45,7 @@ export default function FormContentCard({
         }
       />
       {index > 0 ? (
-        <div className="w-full flex justify-center items-center mt-8">
+        <div className="mt-8 flex w-full items-center justify-center">
           <Button type="button" onClick={() => handleDelete(index)} color="red">
             <svg
               width="15"

@@ -1,8 +1,8 @@
 "use client";
 
+import Cookies from "js-cookie";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import Cookies from "js-cookie";
 
 export default function Login() {
   const params = useSearchParams();
@@ -14,7 +14,7 @@ export default function Login() {
       Cookies.set("token", token, { expires: 14 });
       router.push("/talkDeck");
     }
-  }, [params]);
+  }, [params, router]);
 
   const handleGoogleLogin = () => {
     window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google_oauth2`;

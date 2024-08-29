@@ -26,7 +26,7 @@ export default function PaginationComponent({ total }: { total: number }) {
   };
 
   return (
-    <div className="w-full text-white flex justify-center items-center mt-8">
+    <div className="mt-8 flex w-full items-center justify-center text-white">
       <Pagination
         value={activePage}
         onChange={handleOnChange}

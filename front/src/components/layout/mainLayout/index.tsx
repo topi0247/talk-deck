@@ -1,3 +1,4 @@
+import React from "react";
 import * as Layout from "@/components/layout";
 
 export default function MainLayout({
@@ -6,10 +7,10 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen w-full">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center">
       <Layout.Header />
-      <main className="flex-grow w-full container p-4 md:p-0">{children}</main>
-      <div className="md:pb-32 w-full">
+      <main className="container w-full grow p-4 md:p-0">{children}</main>
+      <div className="w-full md:pb-32">
         <Layout.Footer />
       </div>
     </div>

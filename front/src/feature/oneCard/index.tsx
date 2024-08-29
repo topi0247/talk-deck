@@ -1,9 +1,9 @@
 "use client";
 
+import { useRecoilValue } from "recoil";
 import CardCarousel from "@/feature/card";
 import useFetch from "@/hook/useFetch";
 import { userState } from "@/recoil";
-import { useRecoilValue } from "recoil";
 
 export default function OneCard({
   params: { uuid },

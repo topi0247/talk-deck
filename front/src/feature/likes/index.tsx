@@ -1,9 +1,9 @@
 "use client";
 import { Button } from "@mantine/core";
-import { useState } from "react";
 import Cookies from "js-cookie";
-import { Config } from "@/config";
+import { useState } from "react";
 import { mutate } from "swr";
+import { Config } from "@/config";
 
 export default function Likes({
   uuid,

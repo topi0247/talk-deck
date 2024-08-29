@@ -1,11 +1,11 @@
 "use client";
-import Link from "next/link";
-import { useDisclosure } from "@mantine/hooks";
 import { Burger, Drawer } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import Link from "next/link";
+import { useRecoilValue } from "recoil";
 import { SiteName } from "@/components/layout";
 import { CurrentUser } from "@/feature/auth";
 import { userState } from "@/recoil";
-import { useRecoilValue } from "recoil";
 
 export default function Header() {
   const [opened, { toggle }] = useDisclosure();
@@ -18,14 +18,14 @@ export default function Header() {
         <Link href={user.name ? "/talkDeck" : "/"}>
           <SiteName />
         </Link>
-        <nav className="hidden md:block md:fixed bottom-0 left-0 w-full z-50 px-8 bg-black bg-opacity-15">
-          <ul className="flex w-full gap-8 max-w-[1000px] m-auto justify-center items-center">
-            <li className="w-1/4 h-28">
+        <nav className="bottom-0 left-0 z-50 hidden w-full bg-black/15 px-8 md:fixed md:block">
+          <ul className="m-auto flex w-full max-w-[1000px] items-center justify-center gap-8">
+            <li className="h-28 w-1/4">
               <Link
                 href="/talkDeck"
-                className="bg-red-300 px-2 pt-2 flex justify-center items-center rounded w-full transform translate-y-12 hover:-translate-y-0 transition-all h-full"
+                className="flex size-full translate-y-12 items-center justify-center rounded bg-red-300 px-2 pt-2 transition-all hover:-translate-y-0"
               >
-                <span className="bg-white h-full text-black w-full px-4 py-4 rounded text-center leading-10">
+                <span className="size-full rounded bg-white p-4 text-center leading-10 text-black">
                   一覧
                   <br />
                   みんなのデッキ
@@ -34,48 +34,48 @@ export default function Header() {
             </li>
             {user.name && (
               <>
-                <li className="w-1/4 h-28">
+                <li className="h-28 w-1/4">
                   <Link
                     href="/talkDeck/new"
-                    className="bg-blue-300 px-2 pt-2 flex justify-center items-center rounded w-full transform translate-y-12 hover:-translate-y-0 transition-all h-full"
+                    className="flex size-full translate-y-12 items-center justify-center rounded bg-blue-300 px-2 pt-2 transition-all hover:-translate-y-0"
                   >
-                    <span className="bg-white h-full text-black w-full px-4 py-4 rounded text-center leading-10">
+                    <span className="size-full rounded bg-white p-4 text-center leading-10 text-black">
                       新規作成
                       <br />
                       新しいデッキ
                     </span>
                   </Link>
                 </li>
-                <li className="w-1/4 h-28">
+                <li className="h-28 w-1/4">
                   <Link
                     href="/talkDeck/mydeck"
-                    className="bg-blue-300 px-2 pt-2 flex justify-center items-center rounded w-full transform translate-y-12 hover:-translate-y-0 transition-all h-full"
+                    className="flex size-full translate-y-12 items-center justify-center rounded bg-blue-300 px-2 pt-2 transition-all hover:-translate-y-0"
                   >
-                    <span className="bg-white h-full text-black w-full px-4 py-4 rounded text-center leading-10">
+                    <span className="size-full rounded bg-white p-4 text-center leading-10 text-black">
                       マイデッキ
                       <br />
                       自分のデッキ
                     </span>
                   </Link>
                 </li>
-                <li className="w-1/4 h-28">
+                <li className="h-28 w-1/4">
                   <Link
                     href="/talkDeck/likes"
-                    className="bg-green-300 px-2 pt-2 flex justify-center items-center rounded w-full transform translate-y-12 hover:-translate-y-0 transition-all h-full"
+                    className="flex size-full translate-y-12 items-center justify-center rounded bg-green-300 px-2 pt-2 transition-all hover:-translate-y-0"
                   >
-                    <span className="bg-white h-full text-black w-full px-4 py-4 rounded text-center leading-10">
+                    <span className="size-full rounded bg-white p-4 text-center leading-10 text-black">
                       お気に入り
                       <br />
                       お気に入り
                     </span>
                   </Link>
                 </li>
-                <li className="w-1/4 h-28">
+                <li className="h-28 w-1/4">
                   <Link
                     href="/mypage"
-                    className="bg-yellow-300 px-2 pt-2 flex justify-center items-center rounded w-full transform translate-y-12 hover:-translate-y-0 transition-all h-full"
+                    className="flex size-full translate-y-12 items-center justify-center rounded bg-yellow-300 px-2 pt-2 transition-all hover:-translate-y-0"
                   >
-                    <span className="bg-white h-full text-black w-full px-4 py-4 rounded text-center leading-10">
+                    <span className="size-full rounded bg-white p-4 text-center leading-10 text-black">
                       マイページ
                       <br />
                       ユーザー設定
@@ -86,7 +86,7 @@ export default function Header() {
             )}
           </ul>
         </nav>
-        <div className="absolute right-0 top-0 m-4 bg-white rounded-full w-12 h-12 flex justify-center items-center z-50 md:hidden">
+        <div className="absolute right-0 top-0 z-50 m-4 flex size-12 items-center justify-center rounded-full bg-white md:hidden">
           <Burger opened={opened} onClick={toggle} aria-label="Menu" />
         </div>
       </header>
@@ -97,21 +97,21 @@ export default function Header() {
         size="xs"
         position="right"
       >
-        <div className="h-full w-full flex justify-center items-center flex-col">
+        <div className="flex size-full flex-col items-center justify-center">
           <SiteName isMenu />
-          <nav className="h-full w-full">
-            <ul className="flex flex-col justify-center items-center h-full w-full">
+          <nav className="size-full">
+            <ul className="flex size-full flex-col items-center justify-center">
               <li className="w-full text-center">
                 <Link
                   href="/"
-                  className="bg-yellow-100 w-full p-4 flex justify-center items-center"
+                  className="flex w-full items-center justify-center bg-yellow-100 p-4"
                   style={{ lineHeight: "1.5" }}
                 >
                   TOP
                 </Link>
                 <Link
                   href="/talkDeck"
-                  className="bg-yellow-100 w-full p-4 flex justify-center items-center"
+                  className="flex w-full items-center justify-center bg-yellow-100 p-4"
                   style={{ lineHeight: "1.5" }}
                 >
                   一覧
@@ -122,7 +122,7 @@ export default function Header() {
                   <li className="w-full text-center">
                     <Link
                       href="/talkDeck/new"
-                      className="bg-yellow-100 w-full p-4 flex justify-center items-center"
+                      className="flex w-full items-center justify-center bg-yellow-100 p-4"
                       style={{ lineHeight: "1.5" }}
                     >
                       新規作成
@@ -131,7 +131,7 @@ export default function Header() {
                   <li className="w-full text-center">
                     <Link
                       href="/talkDeck/mydeck"
-                      className="bg-yellow-100 w-full p-4 flex justify-center items-center"
+                      className="flex w-full items-center justify-center bg-yellow-100 p-4"
                       style={{ lineHeight: "1.5" }}
                     >
                       マイデッキ
@@ -140,7 +140,7 @@ export default function Header() {
                   <li className="w-full text-center">
                     <Link
                       href="/talkDeck/likes"
-                      className="bg-yellow-100 w-full p-4 flex justify-center items-center"
+                      className="flex w-full items-center justify-center bg-yellow-100 p-4"
                       style={{ lineHeight: "1.5" }}
                     >
                       お気に入り
@@ -149,7 +149,7 @@ export default function Header() {
                   <li className="w-full text-center">
                     <Link
                       href="/mypage"
-                      className="bg-yellow-100 w-full p-4 flex justify-center items-center"
+                      className="flex w-full items-center justify-center bg-yellow-100 p-4"
                       style={{ lineHeight: "1.5" }}
                     >
                       ユーザーページ

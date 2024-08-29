@@ -1,11 +1,11 @@
 "use client";
 
-import { Config } from "@/config";
-import { userState } from "@/recoil";
 import { Button, Container, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useRecoilState } from "recoil";
 import Cookies from "js-cookie";
+import { useRecoilState } from "recoil";
+import { Config } from "@/config";
+import { userState } from "@/recoil";
 
 export default function MyPage() {
   const [user, setUser] = useRecoilState(userState);
@@ -47,9 +47,9 @@ export default function MyPage() {
   return (
     <article className="w-full md:mb-32">
       <Container className="md:w-96">
-        <h2 className="text-3xl text-center text-white">マイページ</h2>
-        <section className="bg-white rounded p-8 my-8">
-          <dl className="flex flex-col justify-center items-start">
+        <h2 className="text-center text-3xl text-white">マイページ</h2>
+        <section className="my-8 rounded bg-white p-8">
+          <dl className="flex flex-col items-start justify-center">
             <div>
               <dt>ユーザー名</dt>
               <dd className="ml-4">{user.name}</dd>
@@ -63,7 +63,7 @@ export default function MyPage() {
               withAsterisk
               {...form.getInputProps("username")}
             />
-            <div className="w-full flex justify-center items-center mt-4">
+            <div className="mt-4 flex w-full items-center justify-center">
               <Button type="submit" color="yellow">
                 <span className="text-black">変更</span>
               </Button>

@@ -1,14 +1,14 @@
 "use client";
 
+import { Container } from "@mantine/core";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
+import { useRecoilValue } from "recoil";
 import CardCarousel from "@/feature/card";
 import PaginationComponent from "@/feature/pagination";
 import useFetch from "@/hook/useFetch";
 import { userState } from "@/recoil";
 import { ICards } from "@/types";
-import { Container } from "@mantine/core";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
-import { useRecoilValue } from "recoil";
 
 function TalkDeckShow() {
   const params = useSearchParams();
@@ -40,7 +40,7 @@ function TalkDeckShow() {
   return (
     <article className="w-full md:mb-32">
       <Container>
-        <h2 className="text-3xl text-center text-white">みんなのデッキ</h2>
+        <h2 className="text-center text-3xl text-white">みんなのデッキ</h2>
         <div className="md:grid md:grid-cols-3">
           {data.length > 0 ? (
             data.map((data: ICards) => (
