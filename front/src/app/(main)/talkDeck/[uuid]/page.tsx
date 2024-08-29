@@ -1,31 +1,35 @@
-"use client";
-
-import CardCarousel from "@/feature/card";
-import useFetch from "@/hook/useFetch";
-import { userState } from "@/recoil";
+import OneCard from "@/feature/oneCard";
 import Link from "next/link";
-import { useRecoilValue } from "recoil";
+
+export async function generateMetadata({
+  params: { uuid },
+}: {
+  params: { uuid: string };
+}) {
+  const URL = process.env.NEXT_PUBLIC_AWS_ENDPOINT || "";
+  const id = uuid;
+  const res = await fetch(`${URL}?id=${id}`);
+  const base64Image = await res.json();
+
+  return {
+    title: `Post ${id}`,
+    description: `Description for post ${id}`,
+    openGraph: {
+      title: `Post ${id}`,
+      description: `Description for post ${id}`,
+      images: [{ url: `data:image/png;base64,${base64Image.data}` }],
+    },
+  };
+}
 
 export default function Card({
   params: { uuid },
 }: {
   params: { uuid: string };
 }) {
-  const user = useRecoilValue(userState);
-  const { loading, error, data } = useFetch(`/situations/${uuid}`);
-  if (loading) return <div>loading...</div>;
-
-  if (error) return <div>error...</div>;
-  console.log(data);
-
   return (
     <>
-      <CardCarousel
-        key={uuid}
-        cards={data}
-        isShared
-        isLikes={user.uuid !== data.user.uuid}
-      />
+      <OneCard params={{ uuid }} />
       <div className="mt-8 flex justify-center items-center">
         <Link
           href="/talkDeck"
