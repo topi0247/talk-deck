@@ -4,6 +4,6 @@ class Api::V1::SessionsController < Api::V1::BasesController
   def create
     user = User.find_or_create_from_auth(request.env['omniauth.auth'])
     token = Jwt.encode(user_id: user.id, expired: Time.now.to_i)
-    redirect_to "#{ENV['FRONT_URL']}?token=#{token}", allow_host: true
+    redirect_to "#{ENV['FRONT_URL']}?token=#{token}", allow_other_host: true
   end
 end
