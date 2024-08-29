@@ -9,7 +9,7 @@ export async function generateMetadata({
   const URL = process.env.NEXT_PUBLIC_AWS_ENDPOINT || "";
   const id = uuid;
   const res = await fetch(`${URL}?id=${id}`);
-  const base64Image = await res.text();
+  const base64Image = await res.json();
 
   const title = "会話デッキ！";
   const description =
@@ -22,13 +22,13 @@ export async function generateMetadata({
     openGraph: {
       title: title,
       description: description,
-      images: [{ url: `data:image/png;base64,${base64Image}` }],
+      images: [{ url: `data:image/png;base64,${base64Image.body}` }],
     },
     twitter: {
       card: "summary_large_image",
       title: title,
       description: description,
-      images: [{ url: `data:image/png;base64,${base64Image}` }],
+      images: [{ url: `data:image/png;base64,${base64Image.body}` }],
     },
   };
 }
