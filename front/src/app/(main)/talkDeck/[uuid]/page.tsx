@@ -10,13 +10,23 @@ export async function generateMetadata({
   const id = uuid;
   const res = await fetch(`${URL}?id=${id}`);
   const base64Image = await res.json();
+  const title = "会話デッキ！";
+  const description =
+    "こんなシチュエーションありませんか？会話デッキで会話に挑め！";
 
   return {
-    title: `Post ${id}`,
-    description: `Description for post ${id}`,
+    metadataBase: process.env.NEXT_PUBLIC_APP_URL || "",
+    title: title,
+    description: description,
     openGraph: {
-      title: `Post ${id}`,
-      description: `Description for post ${id}`,
+      title: title,
+      description: description,
+      images: [{ url: `data:image/png;base64,${base64Image.data}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
       images: [{ url: `data:image/png;base64,${base64Image.data}` }],
     },
   };
