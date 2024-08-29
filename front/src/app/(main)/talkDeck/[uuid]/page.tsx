@@ -10,6 +10,7 @@ export async function generateMetadata({
   const id = uuid;
   const res = await fetch(`${URL}?id=${id}`);
   const base64Image = await res.json();
+  console.log(base64Image.body);
 
   const title = "会話デッキ！";
   const description =
