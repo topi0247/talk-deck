@@ -1,7 +1,7 @@
 include Pagy::Backend
 
 class Api::V1::SituationsController < Api::V1::BasesController
-  skip_before_action :authenticate!, only: %i[all_count]
+  skip_before_action :authenticate!, only: %i[index show all_count]
 
   def index
     current_page = params[:page] || 1
@@ -14,7 +14,7 @@ class Api::V1::SituationsController < Api::V1::BasesController
 
   def show
     situation = Situation.find_by(uuid: params[:id])
-    render json: situation, serializer: SituationSerializer, status: :ok
+    render json: situation, serializer: SituationSerializer, current_user: @current_user, status: :ok
   end
 
   def create

@@ -1,37 +1,49 @@
 import Link from "next/link";
 import OneCard from "@/feature/oneCard";
+import { Metadata } from "next";
 
 export async function generateMetadata({
   params: { uuid },
 }: {
   params: { uuid: string };
-}) {
+}): Promise<Metadata> {
   const URL = process.env.NEXT_PUBLIC_AWS_ENDPOINT || "";
-  const id = uuid;
-  const res = await fetch(`${URL}?id=${id}`);
-  const base64Image = await res.json();
-  console.log(base64Image.body);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
-  const title = "会話デッキ！";
-  const description =
-    "こんなシチュエーションありませんか？会話デッキで会話に挑め！";
+  try {
+    const situationsRes = await fetch(`${API_URL}/api/v1/situations/${uuid}`);
+    console.log(situationsRes);
+    const situationJson = await situationsRes.json();
+    const res = await fetch(`${URL}?title=${situationJson.title}`);
+    const base64Image = await res.json();
 
-  return {
-    metadataBase: process.env.NEXT_PUBLIC_APP_URL || "",
-    title: title,
-    description: description,
-    openGraph: {
+    const title = "会話デッキ！";
+    const description =
+      "こんなシチュエーションありませんか？会話デッキで会話に挑め！";
+
+    return {
       title: title,
       description: description,
-      images: [{ url: `data:image/png;base64,${base64Image.body}` }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: title,
-      description: description,
-      images: [{ url: `data:image/png;base64,${base64Image.body}` }],
-    },
-  };
+      openGraph: {
+        title: title,
+        description: description,
+        url: `${process.env.NEXT_PUBLIC_APP_URL}/talkDeck/${uuid}`,
+        images: [{ url: `data:image/png;base64,${base64Image.body}` }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: title,
+        description: description,
+        images: [{ url: `data:image/png;base64,${base64Image.body}` }],
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
+    return {
+      title: "エラー",
+      description: "メタデータの取得中にエラーが発生しました。",
+    };
+  }
 }
 
 export default function Card({
