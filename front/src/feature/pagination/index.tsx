@@ -21,7 +21,6 @@ export default function PaginationComponent({ total }: { total: number }) {
     const url = new URL(window.location.href);
     url.searchParams.set("page", pageNumber.toString());
     const nextUrl = url.toString().replace(window.location.origin, "");
-    console.log(nextUrl);
     router.push(nextUrl);
   };
 

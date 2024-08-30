@@ -1,11 +1,9 @@
 include Pagy::Backend
 
 class Api::V1::LikesController < Api::V1::BasesController
+
   def index
-    current_page = params[:page] || 1
-    total_page = (@current_user.likes.count / 9).ceil
-    current_page = total_page if current_page.to_i >= total_page
-    current_page = 1 if current_page.to_i <= 0
+    current_page = calc_current_page(params[:page])
     pagy, situations = pagy(@current_user.likes.includes(situation: :contents), page: current_page, limit: 9)
     render json: situations, each_serializer: LikeSerializer, current_user: @current_user, status: :ok
   end
@@ -38,5 +36,13 @@ class Api::V1::LikesController < Api::V1::BasesController
 
   def like_params
     params.require(:like).permit(:uuid)
+  end
+
+  def calc_current_page(page)
+    current_page = page || 1
+    total_page = (Situation.all.count / 9.0).ceil
+    current_page = total_page if current_page.to_i >= total_page
+    current_page = 1 if current_page.to_i <= 0
+    current_page
   end
 end

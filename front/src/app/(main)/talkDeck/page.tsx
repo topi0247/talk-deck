@@ -19,20 +19,18 @@ function TalkDeckShow() {
     : "/situations";
   const { loading, error, data } = useFetch(url);
   const { data: all_count } = useFetch("/situations/all_count");
-  let totalPages = 1;
-  if (all_count) {
-    totalPages = Math.ceil(all_count.count / 9);
-  }
 
   useEffect(() => {
     if (!all_count) return;
     const page = params.get("page");
     if (!page) return;
 
+    let totalPages = 1;
+    totalPages = Math.ceil(all_count.count / 9);
     if (Number(page) >= totalPages) {
       router.push(`/talkDeck?page=${totalPages}`);
     }
-  }, [all_count, params, router, totalPages]);
+  }, [all_count, params, router]);
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>error...</div>;
@@ -56,7 +54,11 @@ function TalkDeckShow() {
           )}
         </div>
       </Container>
-      {all_count && <PaginationComponent total={totalPages} />}
+      {all_count && (
+        <PaginationComponent
+          total={Math.ceil(all_count ? all_count.count / 9 : 1)}
+        />
+      )}
     </article>
   );
 }
