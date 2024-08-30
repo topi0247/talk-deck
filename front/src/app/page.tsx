@@ -1,7 +1,7 @@
-import { Container } from "@mantine/core";
+import { Container, Image } from "@mantine/core";
 import Link from "next/link";
 import { Suspense } from "react";
-import { Footer, SiteName } from "@/components/layout";
+import { Footer } from "@/components/layout";
 import { Login } from "@/feature/auth";
 
 export default function Home() {
@@ -9,10 +9,10 @@ export default function Home() {
     <div className="flex min-h-screen w-full flex-col items-center justify-center text-black">
       <div className="w-full grow">
         <main className="w-full p-4">
-          <Link href="/">
-            <SiteName />
-          </Link>
           <Container className="my-8">
+            <div className="border my-8">
+              <Image src="/ogp.png" />
+            </div>
             <div className="flex flex-col items-center justify-center rounded bg-white">
               <h2 className="w-full rounded-t bg-yellow-300 py-1 text-center text-xl font-semibold tracking-[5px]">
                 会話デッキとは？
