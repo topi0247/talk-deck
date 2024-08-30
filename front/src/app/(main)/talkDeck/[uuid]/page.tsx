@@ -12,7 +12,6 @@ export async function generateMetadata({
 
   try {
     const situationsRes = await fetch(`${API_URL}/api/v1/situations/${uuid}`);
-    console.log(situationsRes);
     const situationJson = await situationsRes.json();
     const res = await fetch(`${URL}?title=${situationJson.title}`);
     const base64Image = await res.json();
