@@ -1,6 +1,6 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import OneCard from "@/feature/oneCard";
-import { Metadata } from "next";
 
 export async function generateMetadata({
   params: { uuid },
