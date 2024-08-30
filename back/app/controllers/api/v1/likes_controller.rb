@@ -6,7 +6,7 @@ class Api::V1::LikesController < Api::V1::BasesController
     total_page = (@current_user.likes.count / 9).ceil
     current_page = total_page if current_page.to_i >= total_page
     current_page = 1 if current_page.to_i <= 0
-    pagy, situations = pagy(@current_user.likes.includes(situation: :contents), page: current_page)
+    pagy, situations = pagy(@current_user.likes.includes(situation: :contents), page: current_page, limit: 9)
     render json: situations, each_serializer: LikeSerializer, current_user: @current_user, status: :ok
   end
 
