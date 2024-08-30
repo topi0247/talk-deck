@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     url: process.env.NEXT_PUBLIC_APP_URL,
     siteName: "会話デッキ",
     type: "website",
-    images: [{ url: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png` }],
+    images: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png`,
   },
   twitter: {
     card: "summary_large_image",
     title: "会話デッキ",
     description: "会話に困る、そんなときにオススメの会話デッキ！",
-    images: [{ url: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png` }],
+    images: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png`,
   },
 };
 
