@@ -3,8 +3,10 @@ class Api::V1::BasesController < ApplicationController
 
   def authenticate!
     token = request.headers['Authorization']
-    return if token.blank?
-    decode = Jwt.decode(token.split(' ').last).first
+    @current_user = nil
+    token = token.split(' ').last
+    return if token == 'undefined' || token == 'Bearer'
+    decode = Jwt.decode(token).first
     expired = decode['expired']
     @current_user = nil
     if expired + 2.weeks < Time.now.to_i

@@ -1,6 +1,10 @@
 class Api::V1::UsersController < Api::V1::BasesController
   def show
-    render json: @current_user, serializer: UserSerializer, status: :ok
+    if @current_user
+      render json: @current_user, serializer: UserSerializer, status: :ok
+    else
+      render json: { error: 'ユーザーが見つかりません' }, status: :not_found
+    end
   end
 
   def update
