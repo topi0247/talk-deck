@@ -20,6 +20,7 @@ export default function New() {
   const [contentCards, setContentCards] = useState<ICard[]>([]);
   const [isTargetError, setIsTargetError] = useState(false);
   const [isContentError, setIsContentError] = useState(false);
+  const [isCreate, setIsCreate] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -75,6 +76,7 @@ export default function New() {
   });
 
   const handleSubmit = async () => {
+    setIsCreate(true);
     const { title, target1, target2, target3 } = form.getValues();
 
     let isError = false;
@@ -89,6 +91,7 @@ export default function New() {
       contentCards.length < 1 || contentCards.some((c) => c.title === "");
 
     if (isError) {
+      setIsCreate(false);
       return;
     }
 
@@ -118,11 +121,13 @@ export default function New() {
 
     if (result.status !== 201) {
       alert("エラーが発生しました");
+      setIsCreate(false);
       return;
     }
 
     const data = await result.json();
     router.push(`/talkDeck/${data.uuid}`);
+    setIsCreate(false);
   };
 
   const handleAddCard = () => {
@@ -246,7 +251,7 @@ export default function New() {
           </div>
 
           <div className="flex w-full items-center justify-center">
-            <Button type="submit" color="yellow">
+            <Button type="submit" color="yellow" disabled={isCreate}>
               <span className="text-black">作成</span>
             </Button>
           </div>
