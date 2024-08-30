@@ -15,7 +15,10 @@ export default function Header() {
     <>
       <CurrentUser />
       <header className="relative w-full pl-2 pt-2">
-        <Link href={user.name ? "/talkDeck" : "/"}>
+        <Link
+          href={user.name ? "/talkDeck" : "/"}
+          className="inline-block w-80"
+        >
           <SiteName />
         </Link>
         <nav className="bottom-0 left-0 z-50 hidden w-full bg-black/15 px-8 md:fixed md:block">
