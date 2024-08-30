@@ -8,7 +8,7 @@ class Api::V1::SituationsController < Api::V1::BasesController
     total_page = (Situation.all.count / 9).ceil
     current_page = total_page if current_page.to_i >= total_page
     current_page = 1 if current_page.to_i <= 0
-    pagy, situations = pagy(Situation.includes(:targets, :contents).all.order(created_at: :desc), page: current_page)
+    pagy, situations = pagy(Situation.includes(:targets, :contents).all.order(created_at: :desc), page: current_page, limit: 9)
     render json: situations, each_serializer: SituationSerializer, current_user: @current_user, status: :ok
   end
 
