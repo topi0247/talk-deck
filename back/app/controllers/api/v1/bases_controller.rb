@@ -4,16 +4,16 @@ class Api::V1::BasesController < ApplicationController
   def authenticate!
     token = request.headers['Authorization']
     @current_user = nil
-    token = token.split(' ').last
-    return if token == 'undefined' || token == 'Bearer'
-    decode = Jwt.decode(token).first
-    expired = decode['expired']
-    @current_user = nil
-    if expired + 2.weeks < Time.now.to_i
-      render json: { error: '認証期間切れです' }, status: :unauthorized
-      return
+    begin
+      token = token.split(' ').last
+      decode = Jwt.decode(token).first
+      expired = decode['expired']
+      if expired + 2.weeks >= Time.now.to_i
+        user_id = decode['user_id']
+        @current_user = User.find_by(id: user_id)
+      end
+    rescue => e
+      Rails.logger.warn("Authentication failed: #{e.message}")
     end
-    user_id = decode['user_id']
-    @current_user = User.find_by(id: user_id)
   end
 end

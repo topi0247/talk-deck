@@ -5,7 +5,7 @@ class Api::V1::SituationsController < Api::V1::BasesController
 
   def index
     current_page = calc_current_page(params[:page])
-    pagy, situations = pagy(Situation.includes(:targets, :contents).all.order(created_at: :desc), page: current_page, limit: 9)
+    _, situations = pagy(Situation.includes(:targets, :contents).all.order(created_at: :desc), page: current_page, limit: 9)
     render json: situations, each_serializer: SituationSerializer, current_user: @current_user, status: :ok
   end
 

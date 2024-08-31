@@ -9,16 +9,52 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const URL = process.env.NEXT_PUBLIC_AWS_ENDPOINT || "";
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
+  const title = "会話デッキ！";
+  const description =
+    "こんなシチュエーションありませんか？会話デッキで会話に挑め！";
 
   try {
     const situationsRes = await fetch(`${API_URL}/api/v1/situations/${uuid}`);
+    console.log(situationsRes);
     const situationJson = await situationsRes.json();
+    console.log(situationJson);
+    if (!situationJson) {
+      return {
+        title: title,
+        description: description,
+        openGraph: {
+          title: title,
+          description: description,
+          url: `${process.env.NEXT_PUBLIC_APP_URL}/talkDeck/${uuid}`,
+        },
+        twitter: {
+          card: "summary_large_image",
+          title: title,
+          description: description,
+        },
+      };
+    }
     const res = await fetch(`${URL}?title=${situationJson.title}`);
+    console.log(res);
     const base64Image = await res.json();
+    console.log(base64Image);
 
-    const title = "会話デッキ！";
-    const description =
-      "こんなシチュエーションありませんか？会話デッキで会話に挑め！";
+    if (!base64Image.body) {
+      return {
+        title: title,
+        description: description,
+        openGraph: {
+          title: title,
+          description: description,
+          url: `${process.env.NEXT_PUBLIC_APP_URL}/talkDeck/${uuid}`,
+        },
+        twitter: {
+          card: "summary_large_image",
+          title: title,
+          description: description,
+        },
+      };
+    }
 
     return {
       title: title,
@@ -39,8 +75,18 @@ export async function generateMetadata({
   } catch (error) {
     console.error("Error fetching metadata:", error);
     return {
-      title: "エラー",
-      description: "メタデータの取得中にエラーが発生しました。",
+      title: title,
+      description: description,
+      openGraph: {
+        title: title,
+        description: description,
+        url: `${process.env.NEXT_PUBLIC_APP_URL}/talkDeck/${uuid}`,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: title,
+        description: description,
+      },
     };
   }
 }
