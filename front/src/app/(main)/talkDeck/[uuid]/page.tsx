@@ -20,17 +20,21 @@ export async function generateMetadata({
     console.log(situationJson);
     if (!situationJson) {
       return {
-        title: title,
-        description: description,
+        title: "会話デッキ",
+        description: "会話に困る、そんなときにオススメの会話デッキ！",
         openGraph: {
-          title: title,
-          description: description,
-          url: `${process.env.NEXT_PUBLIC_APP_URL}/talkDeck/${uuid}`,
+          title: "会話デッキ",
+          description: "会話に困る、そんなときにオススメの会話デッキ！",
+          url: process.env.NEXT_PUBLIC_APP_URL,
+          siteName: "会話デッキ",
+          type: "website",
+          images: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png`,
         },
         twitter: {
           card: "summary_large_image",
-          title: title,
-          description: description,
+          title: "会話デッキ",
+          description: "会話に困る、そんなときにオススメの会話デッキ！",
+          images: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png`,
         },
       };
     }
@@ -41,17 +45,21 @@ export async function generateMetadata({
 
     if (!base64Image.body) {
       return {
-        title: title,
-        description: description,
+        title: "会話デッキ",
+        description: "会話に困る、そんなときにオススメの会話デッキ！",
         openGraph: {
-          title: title,
-          description: description,
-          url: `${process.env.NEXT_PUBLIC_APP_URL}/talkDeck/${uuid}`,
+          title: "会話デッキ",
+          description: "会話に困る、そんなときにオススメの会話デッキ！",
+          url: process.env.NEXT_PUBLIC_APP_URL,
+          siteName: "会話デッキ",
+          type: "website",
+          images: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png`,
         },
         twitter: {
           card: "summary_large_image",
-          title: title,
-          description: description,
+          title: "会話デッキ",
+          description: "会話に困る、そんなときにオススメの会話デッキ！",
+          images: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png`,
         },
       };
     }
@@ -75,17 +83,21 @@ export async function generateMetadata({
   } catch (error) {
     console.error("Error fetching metadata:", error);
     return {
-      title: title,
-      description: description,
+      title: "会話デッキ",
+      description: "会話に困る、そんなときにオススメの会話デッキ！",
       openGraph: {
-        title: title,
-        description: description,
-        url: `${process.env.NEXT_PUBLIC_APP_URL}/talkDeck/${uuid}`,
+        title: "会話デッキ",
+        description: "会話に困る、そんなときにオススメの会話デッキ！",
+        url: process.env.NEXT_PUBLIC_APP_URL,
+        siteName: "会話デッキ",
+        type: "website",
+        images: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png`,
       },
       twitter: {
         card: "summary_large_image",
-        title: title,
-        description: description,
+        title: "会話デッキ",
+        description: "会話に困る、そんなときにオススメの会話デッキ！",
+        images: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png`,
       },
     };
   }
